@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MandrilAPI 🐒
 
 API REST construida con ASP.NET Core 8.0 para gestionar "Mandriles" y sus habilidades. Este proyecto sirve como ejemplo educativo para diseño de APIs RESTful en .NET.
@@ -56,3 +57,6 @@ La documentación Swagger estará disponible en `https://localhost:5062/swagger`
 
 
 
+=======
+# MandrilAPI
+>>>>>>> a492e762ac1f069fa83d243eb32e0bcd144faa2a
