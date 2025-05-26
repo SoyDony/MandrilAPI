@@ -55,7 +55,9 @@ public class HabilidadController : ControllerBase
         {
             return BadRequest(Mensajes.Habilidad.BadRequest);
         }
-        var MaxHabilidad = mandril.Habilidades?.Max(h => h.Id) ?? 0;
+        var MaxHabilidad = (mandril.Habilidades != null && mandril.Habilidades.Any()) 
+                   ? mandril.Habilidades.Max(h => h.Id) 
+                   : 0;
 
         var nuevaHabilidad = new Habilidad()
         {
@@ -97,10 +99,10 @@ public class HabilidadController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{HabilidadId}")] //Delete para eliminar una habilidad de un mandril
-    public ActionResult DeleteHabilidad(int mandrilId, int HabilidadId)
+    [HttpDelete("{HabilidadId}")]//Delete para eliminar una habilidad de un mandril
+    public ActionResult DeleteHabilidad(int MandrilId, int HabilidadId)
     {
-        var mandril = MandrilDataStore.Current.Mandriles?.FirstOrDefault(m => m.Id == mandrilId);
+        var mandril = MandrilDataStore.Current.Mandriles?.FirstOrDefault(m => m.Id == MandrilId);
 
         if (mandril == null)
         {
