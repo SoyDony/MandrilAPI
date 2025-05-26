@@ -41,9 +41,9 @@ public class HabilidadController : ControllerBase
     }
 
     [HttpPost] //Post para agregar una nueva habilidad a un mandril
-    public ActionResult<Habilidad> PostHabilidad(int mandrilId, Habilidad habilidadInsert)
+    public ActionResult<Habilidad> PostHabilidad(int MandrilId, HabilidadInsert habilidadInsert)
     {
-        var mandril = MandrilDataStore.Current.Mandriles?.FirstOrDefault(m => m.Id == mandrilId);
+        var mandril = MandrilDataStore.Current.Mandriles?.FirstOrDefault(m => m.Id == MandrilId);
 
         if (mandril == null)
         {
@@ -55,15 +55,16 @@ public class HabilidadController : ControllerBase
         {
             return BadRequest(Mensajes.Habilidad.BadRequest);
         }
-        var MaxHabilidadId = mandril.Habilidades?.Max(h => h.Id) ?? 0;
+        var MaxHabilidad = mandril.Habilidades?.Max(h => h.Id) ?? 0;
+
         var nuevaHabilidad = new Habilidad()
         {
-            Id = MaxHabilidadId + 1,
+            Id = MaxHabilidad + 1,
             Name = habilidadInsert.Name,
             Potencia = habilidadInsert.Potencia
         };
         mandril.Habilidades?.Add(nuevaHabilidad);
-        return CreatedAtAction(nameof(GetHabilidad), new { MandrilId = mandrilId, habilidadId = nuevaHabilidad.Id }, nuevaHabilidad);
+        return CreatedAtAction(nameof(GetHabilidad), new { MandrilId = MandrilId, habilidadId = nuevaHabilidad.Id }, nuevaHabilidad);
 
     }
 
